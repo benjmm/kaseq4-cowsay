@@ -2,6 +2,11 @@
 
 <h3>History</h3>
 
-<p>(post history goes here)</p>
-
-{% endblock %}
+{% for moo in moos %}
+<div class="post">
+  <div class="date">
+    <p>Published: {{ moo.date }}</p>
+  </div>
+  <p>{{ moo.text|linebreaksbr }}</p>
+</div>
+{% endfor %} {% endblock %}

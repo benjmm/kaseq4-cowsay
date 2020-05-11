@@ -1,4 +1,5 @@
 from django.shortcuts import render, reverse, HttpResponseRedirect
+from django.utils import timezone
 
 from appcowsay.models import Moo
 from appcowsay.forms import FormAddMoo
@@ -6,7 +7,6 @@ from appcowsay.forms import FormAddMoo
 
 def index(request):
     html = "index.html"
-
     if request.method == "POST":
         form = FormAddMoo(request.POST)
         if form.is_valid():
@@ -28,4 +28,6 @@ def errorview(request):
 
 def historyview(request):
     html = "history.html"
-    return render(request, html)
+    moos = Moo.objects.filter(
+        date__lte=timezone.now()).order_by('date')
+    return render(request, html, {'moos': moos})
