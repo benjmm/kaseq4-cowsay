@@ -16,6 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from appcowsay.urls import urlpatterns as appcowsay_urls
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+urlpatterns += appcowsay_urls

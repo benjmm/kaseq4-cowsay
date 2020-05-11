@@ -25,8 +25,9 @@ SECRET_KEY = 'dpat4!aoim7w=x7x9(n%+m!m-!m!)z%8^5k-qr1_-cllodg1*%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+STATIC_URL = '/static/'
 
 # Application definition
 
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'appcowsay.apps.AppcowsayConfig',
 ]
 
 MIDDLEWARE = [
