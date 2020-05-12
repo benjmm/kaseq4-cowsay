@@ -3,6 +3,8 @@
 import os
 import sys
 
+__author__ = "benjmm with utf-8 assistance from kano and CSS help from the Django Girls"
+
 
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'projcowsay.settings')
