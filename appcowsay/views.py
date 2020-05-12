@@ -17,10 +17,12 @@ def index(request):
         if form.is_valid():
             data = form.cleaned_data
             text = data['text']
+            cow = data['cow']
             Moo.objects.create(
                 text=text,
-            )
-            moo = subprocess.check_output(["cowsay", text]).decode('utf-8')
+                cow=cow)
+            moo = subprocess.check_output(
+                ["cowsay", '-f', cow, text]).decode('utf-8')
             return render(request, html, {'form': FormAddMoo,
                                           'moo': moo})
 
