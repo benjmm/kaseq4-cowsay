@@ -6,28 +6,31 @@ from appcowsay.forms import FormAddMoo
 
 
 def index(request):
-    html = "index.html"
-    if request.method == "POST":
+    html = 'index.html'
+    if request.method == 'POST':
         form = FormAddMoo(request.POST)
         if form.is_valid():
             data = form.cleaned_data
             Moo.objects.create(
                 text=data['text'],
             )
-            return HttpResponseRedirect(reverse('homepage'))
+            # return HttpResponseRedirect(reverse('homepage'))
+            return render(request, html, {'form': FormAddMoo,
+                                          'moo': data['text']})
 
     form = FormAddMoo()
 
-    return render(request, html, {"form": form})
+    return render(request, html, {'form': form})
 
 
 def errorview(request):
-    html = "error.html"
+    html = 'error.html'
     return render(request, html)
 
 
 def historyview(request):
-    html = "history.html"
-    moos = Moo.objects.filter(
-        date__lte=timezone.now()).order_by('date')
+    html = 'history.html'
+    # last = Moo.objects.all().count()
+    # moos = Moo.objects.all()[(last-3):last].order_by('-date')
+    moos = Moo.objects.order_by('-date')[:10]
     return render(request, html, {'moos': moos})
