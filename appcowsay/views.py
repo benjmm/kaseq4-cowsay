@@ -1,6 +1,8 @@
 from django.shortcuts import render, reverse, HttpResponseRedirect
 from django.utils import timezone
 
+import subprocess
+
 from appcowsay.models import Moo
 from appcowsay.forms import FormAddMoo
 
@@ -11,12 +13,15 @@ def index(request):
         form = FormAddMoo(request.POST)
         if form.is_valid():
             data = form.cleaned_data
+            text = data['text']
             Moo.objects.create(
-                text=data['text'],
+                text=text,
             )
-            # return HttpResponseRedirect(reverse('homepage'))
+            # moo = data['text']
+            p = subprocess.Popen(["cowsay", text], stdout=subprocess.PIPE)
+            moo = p.communicate()[0]
             return render(request, html, {'form': FormAddMoo,
-                                          'moo': data['text']})
+                                          'moo': moo})
 
     form = FormAddMoo()
 
@@ -32,5 +37,5 @@ def historyview(request):
     html = 'history.html'
     # last = Moo.objects.all().count()
     # moos = Moo.objects.all()[(last-3):last].order_by('-date')
-    moos = Moo.objects.order_by('-date')[:10]
+    moos = Moo.objects.order_by('-date')[: 10]
     return render(request, html, {'moos': moos})
