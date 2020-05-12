@@ -1,9 +1,5 @@
 from django import forms
-import subprocess
-
-cows = subprocess.check_output(
-    ["cowsay", '-l']).decode('utf-8').split()[4:]
-cow_list = list(zip(cows, cows))
+from appcowsay.helpers import cow_list
 
 
 class FormAddMoo(forms.Form):
