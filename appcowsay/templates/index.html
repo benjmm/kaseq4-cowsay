@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block content %}
+
+<h3>What does the cow say?</h3>
+
+<form action="" method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <input type="submit" value="Submit" />
+</form>
+
+<p><pre>{{ moo }}</pre></p>
+
+<h4><a href="/history">Cowsay History</a></h4>
+
+{% endblock %}

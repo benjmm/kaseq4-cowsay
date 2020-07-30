@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block content %}
+
+<h3>History</h3>
+
+{% for moo in moos %}
+<div class="post">
+  <div class="date">
+    <p>{{ moo.date }}:</p>
+  </div>
+  <!-- <p>{{ moo.text|linebreaksbr }}</p> -->
+  <p>"{{ moo.text }}"</p>
+  <p><i>-{{ moo.cow }}</i></p>
+</div>
+{% endfor %} {% endblock %}
