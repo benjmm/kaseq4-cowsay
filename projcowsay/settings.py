@@ -25,7 +25,10 @@ SECRET_KEY = 'dpat4!aoim7w=x7x9(n%+m!m-!m!)z%8^5k-qr1_-cllodg1*%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
+else:
+    ALLOWED_HOSTS = ['cowsay.ddns.net', '.cowsay.ddns.net']
 
 STATIC_URL = '/static/'
 
